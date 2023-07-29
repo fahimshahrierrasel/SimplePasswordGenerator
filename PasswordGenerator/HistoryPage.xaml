@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PasswordGenerator.HistoryPage"
+             xmlns:viewmodel="clr-namespace:PasswordGenerator.ViewModel"
+             xmlns:models="clr-namespace:PasswordGenerator.Model"
+             x:DataType="viewmodel:HistoryViewModel"
+             Title="Password History"
+             Padding="16, 0">
+
+    <CollectionView
+        ItemsSource="{Binding Histories}">
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="models:PasswordHistoryItem">
+                <Grid Padding="0, 5">
+                    <Frame Padding="10, 5">
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="{Binding Password}" FontSize="18"/>
+                            <Label Text="{Binding CopiedAt}" FontSize="12" />
+                        </VerticalStackLayout>
+                    </Frame>
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>

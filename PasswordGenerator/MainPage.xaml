@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewmodel="clr-namespace:PasswordGenerator.ViewModel"
+             x:Class="PasswordGenerator.MainPage"
+             x:DataType="viewmodel:MainViewModel">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="History" IconImageSource="history.png" Command="{Binding GoToHistoryCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto" 
+          ColumnDefinitions="*, Auto" 
+          Padding="16, 0" 
+          RowSpacing="20">
+        <VerticalStackLayout Grid.Row="1">
+            <Label Text="Uppercase Letters" />
+            <Entry Placeholder="Uppercase Letters" Text="{Binding UpperCaseLetters}" IsEnabled="{Binding IsUsingUppercase}">
+                <Entry.Behaviors>
+                    <toolkit:EventToCommandBehavior EventName="TextChanged" Command="{Binding ConfigChangedCommand}" />
+                </Entry.Behaviors>
+            </Entry>
+        </VerticalStackLayout>
+        <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding IsUsingUppercase}" >
+            <CheckBox.Behaviors>
+                <toolkit:EventToCommandBehavior EventName="CheckedChanged" Command="{Binding ConfigChangedCommand}" />
+            </CheckBox.Behaviors>
+        </CheckBox>
+        <VerticalStackLayout  Grid.Row="2">
+            <Label Text="Lowercase Letters" />
+            <Entry Placeholder="Lowercase Letters" Text="{Binding LowerCaseLetters}" IsEnabled="{Binding IsUsingLowercase}" >
+                <Entry.Behaviors>
+                    <toolkit:EventToCommandBehavior EventName="TextChanged" Command="{Binding ConfigChangedCommand}" />
+                </Entry.Behaviors>
+            </Entry>
+        </VerticalStackLayout>
+        <CheckBox Grid.Row="2" Grid.Column="1" IsChecked="{Binding IsUsingLowercase}">
+            <CheckBox.Behaviors>
+                <toolkit:EventToCommandBehavior EventName="CheckedChanged" Command="{Binding ConfigChangedCommand}" />
+            </CheckBox.Behaviors>
+        </CheckBox>
+        <VerticalStackLayout  Grid.Row="3" >
+            <Label Text="Numbers" />
+            <Entry Placeholder="Numbers" Text="{Binding Numbers}" IsEnabled="{Binding IsUsingNumbers}">
+                <Entry.Behaviors>
+                    <toolkit:EventToCommandBehavior EventName="TextChanged" Command="{Binding ConfigChangedCommand}" />
+                </Entry.Behaviors>
+            </Entry>
+        </VerticalStackLayout>
+        <CheckBox Grid.Row="3" Grid.Column="1" IsChecked="{Binding IsUsingNumbers}">
+            <CheckBox.Behaviors>
+                <toolkit:EventToCommandBehavior EventName="CheckedChanged" Command="{Binding ConfigChangedCommand}" />
+            </CheckBox.Behaviors>
+        </CheckBox>
+        <VerticalStackLayout Grid.Row="4">
+            <Label Text="Symbols" />
+            <Entry Placeholder="Symbols" Text="{Binding Symbols}" IsEnabled="{Binding IsUsingSymbols}" >
+                <Entry.Behaviors>
+                    <toolkit:EventToCommandBehavior EventName="TextChanged" Command="{Binding ConfigChangedCommand}" />
+                </Entry.Behaviors>
+            </Entry>
+        </VerticalStackLayout>
+        <CheckBox Grid.Row="4" Grid.Column="1" IsChecked="{Binding IsUsingSymbols}">
+            <CheckBox.Behaviors>
+                <toolkit:EventToCommandBehavior EventName="CheckedChanged" Command="{Binding ConfigChangedCommand}" />
+            </CheckBox.Behaviors>
+        </CheckBox>
+        <VerticalStackLayout Grid.Row="5" Grid.ColumnSpan="2" Spacing="10">
+            <Label Text="Length" />
+            <Grid ColumnDefinitions="*, Auto" ColumnSpacing="4">
+                <Slider Minimum="6" Maximum="50" Value="{Binding Length}" >
+                    <Slider.Behaviors>
+                        <toolkit:EventToCommandBehavior EventName="ValueChanged" Command="{Binding ConfigChangedCommand}" />
+                    </Slider.Behaviors>
+                </Slider>
+                <Label Text="{Binding Length}" FontSize="16" FontAttributes="Bold" Grid.Column="1"/>
+            </Grid>
+        </VerticalStackLayout>
+        <VerticalStackLayout Grid.Row="6" Grid.ColumnSpan="2">
+            <Label Text="Password" />
+            <Entry Placeholder="Password" FontSize="18" Text="{Binding Password}" IsReadOnly="True" IsSpellCheckEnabled="False" />
+        </VerticalStackLayout>
+        <VerticalStackLayout Grid.Row="7" Grid.ColumnSpan="2" Spacing="10" >
+            <Button Text="Regenerate" Command="{Binding ConfigChangedCommand}" TextTransform="Uppercase"/>
+            <Button Text="Copy" TextTransform="Uppercase" Command="{Binding CopyPasswordCommand}"/>
+        </VerticalStackLayout>
+    </Grid>
+
+</ContentPage>
